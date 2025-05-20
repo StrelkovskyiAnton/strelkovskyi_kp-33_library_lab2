@@ -1,0 +1,36 @@
+﻿@page
+@model WebApplication1.Pages.Books.DetailsModel
+@{
+    ViewData["Title"] = "Інформація про книгу";
+}
+<h1>Інформація про книгу</h1>
+<form method="post">
+    <input type="hidden" asp-for="Book.book_id" />
+    <div>
+    <p><strong>ID:</strong> @Model.Book.book_id</p>
+    <p><strong>Назва:</strong> @Model.Book.title</p>
+    <p><strong>Автор:</strong> @Model.Book.author_first_name @Model.Book.author_last_name</p>
+    <p><strong>Жанр:</strong> @Model.Book.genre</p>
+    <p><strong>Читач:</strong> @(Model.Book.Reader != null ? $"{Model.Book.Reader.first_name} {Model.Book.Reader.last_name}, ID: {Model.Book.Reader.reader_id}" : "Ніхто не позичив")</p>
+    </div>
+</form>
+<div class="mt-3">
+    <form method="post" asp-page-handler="Borrow">
+        <input type="hidden" asp-for="Book.book_id" />
+        <label>ID читача:</label>
+        <input asp-for="ReaderId" class="form-control" placeholder="Reader ID" />
+        <button type="submit" class="btn btn-primary mt-1">Позичити</button>
+    </form>
+
+    <form method="post" asp-page-handler="Return" class="mt-2">
+        <input type="hidden" name="id" value="@Model.Book.book_id" />
+        <button type="submit" class="btn btn-warning">Повернути книгу</button>
+    </form>
+
+    <a asp-page="./Index" class="btn btn-secondary mt-2">Назад</a>
+</div>
+
+@if (!string.IsNullOrEmpty(Model.Message))
+{
+        <div class="alert alert-warning mt-2">@Model.Message</div>
+}

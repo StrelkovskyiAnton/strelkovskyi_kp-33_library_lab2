@@ -1,0 +1,31 @@
+﻿@page "{id:int}"
+@model WebApplication1.Pages.Books.EditModel
+@{
+    ViewData["Title"] = "Редагування книжки";
+}
+<h1>Редагування книжки</h1>
+<form method="post">
+    <input type="hidden" asp-for="Book.book_id" />
+    <div>
+        <strong>Назва:</strong>
+        <input asp-for="Book.title" />
+        <span asp-validation-for="Book.title"></span>
+    </div>
+    <div>
+        <strong>Жанр:</strong>
+        <input asp-for="Book.genre" />
+        <span asp-validation-for="Book.genre"></span>
+    </div>
+    <div>
+        <strong>Ім'я автора:</strong>
+        <input asp-for="Book.author_first_name" />
+        <span asp-validation-for="Book.author_first_name"></span>
+    </div>
+    <div>
+        <strong>Прізвище автора:</strong>
+        <input asp-for="Book.author_last_name" />
+        <span asp-validation-for="Book.author_last_name"></span>
+    </div>
+    <button type="submit">Зберегти</button>
+    <a asp-page="Index">Повернутися до переліку</a>
+</form>

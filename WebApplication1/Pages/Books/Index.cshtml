@@ -1,0 +1,36 @@
+﻿@page
+@model WebApplication1.Pages.Books.IndexModel
+@{
+    ViewData["Title"] = "Книжки";
+}
+<h1>Книжки</h1>
+<p>
+    <a asp-page="Create">Створити нову книжку</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Назва</th>
+            <th>Жанр</th>
+            <th>Автор</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var book in Model.Books)
+        {
+        <tr>
+            <td>@book.book_id</td>
+            <td>@book.title</td>
+            <td>@book.genre</td>
+            <td>@book.author_first_name @book.author_last_name</td>
+            <td>
+                <a asp-page="Details" asp-route-id="@book.book_id">Деталі</a> |
+                <a asp-page="Edit" asp-route-id="@book.book_id">Редагувати</a> |
+                <a asp-page="Delete" asp-route-id="@book.book_id">Видалити</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
